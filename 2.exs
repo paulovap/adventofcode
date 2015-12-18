@@ -5,6 +5,11 @@ defmodule Day2 do
 	  extra = l*w |> min w*h |> min h*l
 	  2*(l*w + w*h + h*l) + extra
   end
+
+  def ribbon(l, w, h) do
+  	areas = Enum.sort([l, w, h])
+  	2*(hd(areas) + hd(tl(areas))) + l*w*h
+  end
 end
 
 IO.puts Enum.reduce input, 0, fn
@@ -12,4 +17,11 @@ IO.puts Enum.reduce input, 0, fn
     [l, w, h] = String.split(dimensions, "x")
     acc + Day2.area(String.to_integer(l), String.to_integer(w), String.to_integer(h))
   end 
+
+IO.puts Enum.reduce input, 0, fn
+  (dimensions, acc) ->
+    [l, w, h] = String.split(dimensions, "x")
+    acc + Day2.ribbon(String.to_integer(l), String.to_integer(w), String.to_integer(h))
+  end 
+
 
